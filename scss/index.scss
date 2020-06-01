@@ -1,0 +1,144 @@
+$border : 1px solid #ddd;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "icons";
+@import "buttons";
+
+body{
+  font-size: 2em;
+  line-height: 1.5em;
+  /*@media screen and (prefers-color-scheme: light) {
+    color: #121212;
+    background-color: #ededed;
+  }*/
+
+  &.dark{
+    background-color: #121212;
+    color: #ededed;
+  }
+  &.light{
+    color: #121212;
+    background-color: #ededed;
+  }
+}
+.wrapper{
+
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 1em;
+}
+.row{
+  display: flex;
+  flex: 12;
+  width: 100%;
+}
+ul{
+  list-style-type: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.hidden{
+  visibility: hidden;
+}
+.show{
+  visibility: visible;
+}
+div>a.nav-item{
+  text-decoration: none;
+  color: silver;
+  opacity: 0.2;
+  margin: 5px 20px;
+  flex: min-content;
+}
+a.nav-item:visited{
+  color: inherit;
+}
+#clock{
+  //color:lightgreen;
+  //text-shadow: 0 0 4px #ffff00;
+
+  color: #aaaaff;
+  text-shadow: 0 0 4px #cc00ff;
+  right: 0;
+  padding: 5px;
+  margin: 2px 2px 2px auto;
+}
+.active{
+  display: inline-block!important;
+}
+.bg-mode-icon{
+  display: none;
+}
+#chess_layout{
+
+  border-collapse: collapse;
+  border: $border;
+  font-size: 1.35em;
+  width: 63rem;
+  padding-top: 100%;
+  position: relative;
+  height: 45rem;
+  margin-right: auto;
+  margin-left: auto;
+  min-width: 310px;
+  .chess_row{
+    border: $border;
+    width: 100%;
+    height: 100%;
+  }
+  .chess_col{
+    border: $border;
+    padding: 5px;
+    width: 7rem;
+    height:5rem;
+    text-align: center;
+    &>.chess_black{
+      color: #aaaaff;
+      transform: rotate(180deg);
+    }
+  }
+  .cords{
+    color: #aab;
+  }
+}
+/*
+.chessWinningNotificationPanel {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  width: 70%;
+  height: 70%;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  background-color: rgba(170, 170, 187, 0.7);
+  color: #1b1e21;
+}
+
+// Modal Content
+.chessWinningNotificationPanelContent {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  justify-content: center;
+  padding: 0;
+  width: 90%;
+  text-align: center;
+  max-width: 1200px;
+}
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}*/
+

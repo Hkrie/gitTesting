@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Chess</title>
+    <meta name="description" content="chess game">
+    <meta name="author" content="Harald Kriebisch">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/clock.js"></script>
+</head>
+
+<body class="dark" onload="printClock();">
+
+<div class="row">
+    <a class="nav-item" href="schriftzeichen.html">Learn Japanese Characters</a>
+    <a class="nav-item" href="chess.html">Chess</a>
+
+    <div id="bg-mode">
+        <button id="light_mode" class="bg-mode-icon btn_icon"><i class="fas fa-sun yellow"></i></button>
+        <button id="dark_mode" class="bg-mode-icon btn_icon"><i class="fas fa-moon blue"></i></button>
+    </div>
+    <div id="clock"></div>
+</div>
+<div class="wrapper">
+<!--<table id="chess_layout">
+
+</table>-->
+    <script src="./js/chess.js"></script>
+    <script src="js/bg-mode.js"></script>
+</div>
+
+</body>
+</html>

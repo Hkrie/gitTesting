@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Japanese Characters</title>
+    <meta name="description" content="Schriftzeichen random Ausgabe">
+    <meta name="author" content="Harald Kriebisch">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/clock.js"></script>
+</head>
+
+<body class="dark" onload="printClock()">
+
+<div class="row">
+    <a class="nav-item" href="schriftzeichen.html">Learn Japanese Characters</a>
+    <a class="nav-item" href="chess.html">Chess</a>
+
+    <div id="bg-mode">
+        <button id="light_mode" class="bg-mode-icon btn_icon"><i class="fas fa-sun yellow"></i></button>
+        <button id="dark_mode" class="bg-mode-icon btn_icon"><i class="fas fa-moon blue"></i></button>
+    </div>
+    <div id="clock"></div>
+</div>
+
+<div class="wrapper">
+    <div style="display: flex;flex: 12">
+        <input class="button btn_primary" type="button" id="btn_jVoc" title="Random" value="Random"/>
+        <input class="button btn_primary" type="button" id="btn_jVocShow" title="Solutions" value="Solutions"/>
+        <div style="flex: 10"></div>
+    </div>
+<div class="row">
+    <div style="flex: 1;text-align: left;margin-left: auto;margin-right: 0">
+        <ul id="output1"> </ul>
+    </div>
+    <div id="solution" class="hidden" style="flex: 1;word-break: break-all; text-align: right">
+        <ul id="output1solutions"> </ul>
+    </div>
+    <div style="flex: 10"> </div>
+</div>
+    <div style="flex: 6"></div>
+</div>
+<script src="./content/content.js"></script>
+<script src="js/index.js"></script>
+<script src="js/bg-mode.js"></script>
+</body>
+</html>
