@@ -1,1 +1,3 @@
-Trying the command $ git commit -a
+Trying the command $ git commit -a 
+
+Trying the command $ git commit -a -v
