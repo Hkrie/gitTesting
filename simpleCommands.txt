@@ -1,5 +1,9 @@
 #to see history of all commits
 $ git log
+#to show patch = changes made
+$ git log -p 
+#to show only the last two commits
+$ git log -2
 
 #add all text files to git
 $ git add \*.txt
