@@ -1,3 +1,10 @@
+#git log last 2 - all most important informations - would strongly recommend using as it is the most meaningful for a full overview
+$ git log --pretty=oneline --stat -2
+
+#edit log format (oneline, short, full, fuller) - recommend: oneline
+$ git log --pretty=oneline
+#show short list of changes in git log - recommend: --stat -1
+$ git log --stat
 #to see history of all commits
 $ git log
 #to show patch = changes made
