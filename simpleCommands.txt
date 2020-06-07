@@ -1,0 +1,11 @@
+#add all text files to git
+$ git add \*.txt
+
+#Rename file in git: git move file_from file_to
+$ git mv "Neues Textdokument.txt" text.txt
+
+#git commit all
+Trying the command $ git commit -a 
+
+#git commit all and transfer edits as well
+Trying the command $ git commit -a -v
