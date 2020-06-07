@@ -1,3 +1,6 @@
+#custom log (for more informations look here: https://git-scm.com/book/de/v2/Git-Grundlagen-Anzeigen-der-Commit-Historie)
+$ git log --pretty=format:"Short Hash - %h, author - %an, emailOfAuthor - %ae, DateOfCreation - %ad, relative DateOfCreation - %ar, nameOfCommitor - %cn, theme - %s" -1
+
 #git log last 2 - all most important informations - would strongly recommend using as it is the most meaningful for a full overview
 $ git log --pretty=oneline --stat -2
 

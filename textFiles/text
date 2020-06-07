@@ -1,2 +1,6 @@
-newtextfile
+#testing git amend
+$ git commit -m 'initial commit'
+$ git add forgottenFiles
+$ git commit --amend
+
 
