@@ -1,0 +1,8 @@
+bootstrap darkmode theme
+
+use existing
+primary use wicket(to get java-resources) + scss
+
+cookies or localstorage to store 
+
+https://www.google.com/search?q=bootstrap+create+dark+mode+toggle&rlz=1C1CHBF_deDE881DE881&oq=bootstrap+create+dark+mode&aqs=chrome.1.69i57j33l3.255630j0j7&sourceid=chrome&ie=UTF-8
