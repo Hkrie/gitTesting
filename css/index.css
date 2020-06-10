@@ -11793,6 +11793,9 @@ a.nav-item:visited {
       transform: rotate(180deg); }
   #chess_layout .cords {
     color: #aab; }
+  #chess_layout .nextLoc {
+    background-color: rgba(144, 238, 144, 0.7);
+    border-radius: 30%; }
 
 /*
 .chessWinningNotificationPanel {

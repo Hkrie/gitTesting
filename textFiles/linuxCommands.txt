@@ -1,0 +1,5 @@
+#install programs using apt-get install
+$ apt-get install bluefish
+#need su rights
+$ sudo !!
+#!! => last command

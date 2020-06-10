@@ -75,6 +75,8 @@ a.nav-item:visited{
 .bg-mode-icon{
   display: none;
 }
+
+//chess
 #chess_layout{
 
   border-collapse: collapse;
@@ -105,6 +107,10 @@ a.nav-item:visited{
   }
   .cords{
     color: #aab;
+  }
+  .nextLoc{
+    background-color: rgba(144,238,144, 0.7);
+    border-radius: 30%;
   }
 }
 /*
