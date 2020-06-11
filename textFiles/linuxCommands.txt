@@ -1,3 +1,9 @@
+#
+
+#deinstall program
+sudo apt-cache remove bluefish
+#upgrade all programs
+sudo apt-get upgrade
 #install programs using apt-get install
 $ apt-get install bluefish
 #need su rights

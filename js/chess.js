@@ -4,8 +4,7 @@ const items = [
 
 ];
 let firstTarget = null;
-
-document.addEventListener("DOMContentLoaded", function(event) {
+const chessGame = (event)=> {
 
     //ll.4 - 87 create chess board with all chess pieces
     const table = document.createElement('table');
@@ -73,13 +72,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     }
                     break;
                 case 8:
-                        if(j===0){
-                            b[j].classList.add('cords');
-                        }else {
-                            b[j].classList.add('cords');
-                            b[j].innerHTML = items[1][j];
-                        }
+                    if(j===0){
+                        b[j].classList.add('cords');
+                    }else {
+                        b[j].classList.add('cords');
+                        b[j].innerHTML = items[1][j];
                     }
+            }
 
             if(j===0){
                 b[j].classList.add('cords');
@@ -95,10 +94,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
         for(let j = 1; j<=8;j++) {
             document.getElementById(items[1][j] + items[0][i]).addEventListener('click', chessMovement);
         }}
+//set white to be the first player moving
+    localStorage.setItem("player\'s turn", 'white');
 
 
 
+};
+document.addEventListener("DOMContentLoaded", (event)=>{
+    chessGame(event);
 });
+
 function chessMovement(e){
                 let _this = e.currentTarget;
                 document.getElementById(_this.id).style.backgroundColor = "#8D2";
@@ -132,6 +137,15 @@ function chessMovement2(_this){
         console.log(_this);
         console.log(this2);
 
+        //check if the correct player is moving
+        if(!this2.firstChild.classList.contains('chess_' + localStorage.getItem("player\'s turn"))){
+        console.log('Player ' + localStorage.getItem("player\'s turn") + ' has to move next.');
+            clearNextLocations();
+            document.getElementById(_this.id).style.backgroundColor = "initial";
+            document.getElementById(this2.id).style.backgroundColor = "initial";
+            return 1;
+        }
+
         //check whether the selected location is a possible movement location
         if(!(_this.classList.contains('nextLoc'))){
             console.log('false movement');
@@ -160,7 +174,12 @@ function chessMovement2(_this){
         if(this2.innerHTML !== ""){
             document.getElementById(_this.id).innerHTML = document.getElementById(this2.id).innerHTML;
             document.getElementById(this2.id).innerHTML = null;
-
+            //swap the next player to move a chess piece white-black
+            if(localStorage.getItem('player\'s turn') === 'white'){
+                localStorage.setItem('player\'s turn', 'black')
+            }else{
+                localStorage.setItem('player\'s turn', 'white');
+            }
         }
         document.getElementById(_this.id).style.backgroundColor = "initial";
         document.getElementById(this2.id).style.backgroundColor = "initial";
@@ -179,6 +198,7 @@ const clearNextLocations = () =>{
 };
 /*
 * showPossibleMovements shows the next possible moves for the selected chess piece
+* sets class to force player to use a move that is possible
 * */
 const showPossibleMovements = (myTarget)=>{
     const chessPiece = myTarget.firstChild.classList;
@@ -192,48 +212,104 @@ const showPossibleMovements = (myTarget)=>{
   switch (chessPiece[1]) {
       case "fa-chess-pawn":
           if(chessPiece.contains('chess_black')){
+              //the four movements a black pawn can have at maximum:
+              const b1 = document.getElementById(items[1][xPosInNum-1] + (yPos-1));
+              const b2 = document.getElementById(items[1][xPosInNum+1] + (yPos-1));
+              const b3 = document.getElementById(xPos + (yPos-1));
+              const b4 = document.getElementById(xPos + (yPos-2));
+              //the attack pattern of a black pawn
+              const blackPawnAttack = () =>{
+                  if(b1){
+                      if(b1.innerHTML !== '' && !b1.classList.contains('cords')){
+                          b1.classList.add('nextLoc');
+                          b1.style.backgroundColor = null;
+                      }
+                  }
+                  if(b2){
+                      if(b2.innerHTML !== '' && !b2.classList.contains('cords')){
+                          b2.classList.add('nextLoc');
+                          b2.style.backgroundColor = null;
+                      }
+                  }
+
+              };
           //const currentLocation = yPos;
           switch(getLocation){
               case "7":
-                  document.getElementById(xPos + (yPos-1)).classList.add('nextLoc');
-                  document.getElementById(xPos + (yPos-1)).style.backgroundColor = null;
-                  document.getElementById(xPos + (yPos-2)).classList.add('nextLoc');
-                  document.getElementById(xPos + (yPos-2)).style.backgroundColor = null;
+                      if(b3.innerHTML === ''){
+                          b3.classList.add('nextLoc');
+                          b3.style.backgroundColor = null;
+                            if(b4.innerHTML === ''){
+                                b4.classList.add('nextLoc');
+                                b4.style.backgroundColor = null;
+                            }
+                      }
+                  blackPawnAttack();
                   break;
               case "6":
               case "5":
               case "4":
               case "3":
               case "2":
-                  document.getElementById(xPos + (yPos-1)).classList.add('nextLoc');
-                  document.getElementById(xPos + (yPos-1)).style.backgroundColor = null;
+                  if(b3.innerHTML === ''){
+                      b3.classList.add('nextLoc');
+                      b3.style.backgroundColor = null;}
+                  blackPawnAttack();
                   break;
               default: console.log('false Location');
           }}else{
+              //the four movements a white pawn can have at maximum:
+              const b5 = document.getElementById(items[1][xPosInNum-1] + (yPos+1));
+              const b6 = document.getElementById(items[1][xPosInNum+1] + (yPos+1));
+              const b7 = document.getElementById(xPos + (yPos+1));
+              const b8 = document.getElementById(xPos + (yPos+2));
+              const whitePawnAttack = () =>{
+                  if(b5){
+                      if(b5.innerHTML !== '' && !b5.classList.contains('cords')){
+                          b5.classList.add('nextLoc');
+                          b5.style.backgroundColor = null;
+                      }
+                  }
+                  if(b6){
+                      if(b6.innerHTML !== '' && !b6.classList.contains('cords')){
+                          b6.classList.add('nextLoc');
+                          b6.style.backgroundColor = null;
+                      }
+                  }
+
+              };
               switch(getLocation){
-                  case "2":console.log(xPos + (yPos+1));
-                      document.getElementById(xPos + (yPos+1)).classList.add('nextLoc');
-                      document.getElementById(xPos + (yPos+1)).style.backgroundColor = null;
-                      document.getElementById(xPos + (yPos+2)).classList.add('nextLoc');
-                      document.getElementById(xPos + (yPos+2)).style.backgroundColor = null;
+                  case "2":
+                      if(b7.innerHTML === ''){
+                          b7.classList.add('nextLoc');
+                          b7.style.backgroundColor = null;
+                          if(b8.innerHTML === ''){
+                              b8.classList.add('nextLoc');
+                              b8.style.backgroundColor = null;
+                          }
+                      }
+                      whitePawnAttack();
                       break;
                   case "3":
                   case "4":
                   case "5":
                   case "6":
                   case "7":
-                      document.getElementById(xPos + (yPos+1)).classList.add('nextLoc');
-                      document.getElementById(xPos + (yPos+1)).style.backgroundColor = null;
+                      if(b7.innerHTML === ''){
+                          b7.classList.add('nextLoc');
+                          b7.style.backgroundColor = null;
+                      }
+                      whitePawnAttack();
                       break;
                   default: console.log('false Location');
           }}
+          removeUselessNextLocations(chessPiece[2]);
         break;
       case "fa-chess-rook":
           for(let y = yPos-1; y > 0;y--) {
               document.getElementById(xPos + y).classList.add('nextLoc');
               document.getElementById(xPos + y).style.backgroundColor = null;
               if(document.getElementById(xPos + y).innerHTML !== ''){
-                  removeUselessNextLocations(chessPiece[2]);
                   break;
                   }
           }
@@ -243,28 +319,26 @@ const showPossibleMovements = (myTarget)=>{
               document.getElementById(xPos + y).classList.add('nextLoc');
               document.getElementById(xPos + y).style.backgroundColor = null;
               if(document.getElementById(xPos + y).innerHTML !== ''){
-                  removeUselessNextLocations(chessPiece[2]);
                   break;}
           }
           for(let x = xPosInNum+1; x<=8;x++){
               document.getElementById(items[1][x] + yPos).classList.add('nextLoc');
               document.getElementById(items[1][x] + yPos).style.backgroundColor = null;
               if(document.getElementById(items[1][x] + yPos).innerHTML !== ''){
-                  removeUselessNextLocations(chessPiece[2]);
                   break;}
           }
           for(let x = xPosInNum-1; x>0;x--){
               document.getElementById(items[1][x] + yPos).classList.add('nextLoc');
               document.getElementById(items[1][x] + yPos).style.backgroundColor = null;
               if(document.getElementById(items[1][x] + yPos).innerHTML !== ''){
-                  removeUselessNextLocations(chessPiece[2]);
                   break;}
           }
+          removeUselessNextLocations(chessPiece[2]);
           break;
       case "fa-chess-king":
           const a1 = document.getElementById(xPos + (yPos-1));
-          a1.classList.add('nextLoc');
-          a1.style.backgroundColor = null;
+          if(a1){a1.classList.add('nextLoc');
+          a1.style.backgroundColor = null;}
 
           const a2 = document.getElementById(xPos + (yPos+1));
           if(a2){a2.classList.add('nextLoc');
@@ -296,6 +370,159 @@ const showPossibleMovements = (myTarget)=>{
 
           removeUselessNextLocations(chessPiece[2]);
         break;
+      case "fa-chess-bishop":
+          let i =1;
+          for(let y = yPos-1; y > 0;y--) {
+              if(xPosInNum-i === 0){break;}
+              let temp = document.getElementById(items[1][xPosInNum-i] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              i++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          i =1;
+          for(let y = yPos-1; y > 0;y--) {
+              if(xPosInNum+i === 9){break;}
+              let temp = document.getElementById(items[1][xPosInNum+i] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              i++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          i =1;
+          for (let y = (yPos+1); y<=8;y++){
+              if(xPosInNum+i === 9){break;}
+              let temp = document.getElementById(items[1][xPosInNum+i] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              i++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          i=1;
+          for (let y = (yPos+1); y<=8;y++){
+              if(xPosInNum-i === 0){break;}
+              let temp = document.getElementById(items[1][xPosInNum-i] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              i++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          removeUselessNextLocations(chessPiece[2]);
+          break;
+      case "fa-chess-queen":
+          for(let y = yPos-1; y > 0;y--) {
+              document.getElementById(xPos + y).classList.add('nextLoc');
+              document.getElementById(xPos + y).style.backgroundColor = null;
+              if(document.getElementById(xPos + y).innerHTML !== ''){
+                  break;
+              }
+          }
+
+          for (let y = parseInt(yPos)+1; y<=8;y++){
+              console.log(document.getElementById(xPos + y));
+              document.getElementById(xPos + y).classList.add('nextLoc');
+              document.getElementById(xPos + y).style.backgroundColor = null;
+              if(document.getElementById(xPos + y).innerHTML !== ''){
+                  break;}
+          }
+          for(let x = xPosInNum+1; x<=8;x++){
+              document.getElementById(items[1][x] + yPos).classList.add('nextLoc');
+              document.getElementById(items[1][x] + yPos).style.backgroundColor = null;
+              if(document.getElementById(items[1][x] + yPos).innerHTML !== ''){
+                  break;}
+          }
+          for(let x = xPosInNum-1; x>0;x--){
+              document.getElementById(items[1][x] + yPos).classList.add('nextLoc');
+              document.getElementById(items[1][x] + yPos).style.backgroundColor = null;
+              if(document.getElementById(items[1][x] + yPos).innerHTML !== ''){
+                  break;}
+          }
+          let j =1;
+          for(let y = yPos-1; y > 0;y--) {
+              if(xPosInNum-j === 0){break;}
+              let temp = document.getElementById(items[1][xPosInNum-j] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              j++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          j =1;
+          for(let y = yPos-1; y > 0;y--) {
+              if(xPosInNum+j === 9){break;}
+              let temp = document.getElementById(items[1][xPosInNum+j] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              j++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          j =1;
+          for (let y = (yPos+1); y<=8;y++){
+              if(xPosInNum+j === 9){break;}
+              let temp = document.getElementById(items[1][xPosInNum+j] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              j++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          j=1;
+          for (let y = (yPos+1); y<=8;y++){
+              if(xPosInNum-j === 0){break;}
+              let temp = document.getElementById(items[1][xPosInNum-j] + (y));
+              temp.classList.add('nextLoc');
+              temp.style.backgroundColor = null;
+              j++;
+              if(temp.innerHTML !== ''){
+                  break;
+              }
+          }
+          removeUselessNextLocations(chessPiece[2]);
+          break;
+      case "fa-chess-knight":
+          const d1 = document.getElementById(items[1][xPosInNum+1] + (yPos+2));
+          if(d1){d1.classList.add('nextLoc');
+              d1.style.backgroundColor = null;}
+          const d2 = document.getElementById(items[1][xPosInNum+1] + (yPos-2));
+          if(d2){d2.classList.add('nextLoc');
+              d2.style.backgroundColor = null;}
+
+          const d3 = document.getElementById(items[1][xPosInNum-1] + (yPos+2));
+          if(d3){d3.classList.add('nextLoc');
+              d3.style.backgroundColor = null;}
+          const d4 = document.getElementById(items[1][xPosInNum-1] + (yPos-2));
+          if(d4){d4.classList.add('nextLoc');
+              d4.style.backgroundColor = null;}
+
+          const d5 = document.getElementById(items[1][xPosInNum+2] + (yPos+1));
+          if(d5){d5.classList.add('nextLoc');
+              d5.style.backgroundColor = null;}
+          const d6 = document.getElementById(items[1][xPosInNum+2] + (yPos-1));
+          if(d6){d6.classList.add('nextLoc');
+              d6.style.backgroundColor = null;}
+
+          const d7 = document.getElementById(items[1][xPosInNum-2] + (yPos+1));
+          if(d7){d7.classList.add('nextLoc');
+              d7.style.backgroundColor = null;}
+          const d8 = document.getElementById(items[1][xPosInNum-2] + (yPos-1));
+          if(d8){d8.classList.add('nextLoc');
+              d8.style.backgroundColor = null;}
+          removeUselessNextLocations(chessPiece[2]);
+
+          break;
+      default: console.log('unknown chess piece detected');
   }
 };
 
@@ -303,7 +530,6 @@ const removeUselessNextLocations = (chessColor)=>{
     let a = [];
     let i=0;
     let myTargets = document.getElementsByClassName('nextLoc');
-    console.log(myTargets);
     //needed to expand to two for-loops as it wasn't working with one (reason unknown)
     for(let item of myTargets){
         if(item.hasChildNodes() === true){
