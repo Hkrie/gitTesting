@@ -9,7 +9,7 @@ const chessGame = (event)=> {
     //ll.4 - 87 create chess board with all chess pieces
     const table = document.createElement('table');
     table.id = 'chess_layout';
-    document.body.appendChild(table);
+    document.getElementById('chessWrapper').appendChild(table);
 
 
 
@@ -102,6 +102,7 @@ const chessGame = (event)=> {
 };
 document.addEventListener("DOMContentLoaded", (event)=>{
     chessGame(event);
+    chessSideBar();
 });
 
 function chessMovement(e){
@@ -554,4 +555,36 @@ const removeUselessNextLocations = (chessColor)=>{
         }}
 };
 */
+const chessSideBar = () =>{
+  const rightSiteBar = document.createElement('table');
+  rightSiteBar.id = 'chessRightSiteBar';
 
+    const rightTrack1 = document.createElement('tr');
+    rightTrack1.classList.add('deadWhiteChessPieces');
+    const rightCol1 = document.createElement('td');
+    const rightCol1_2 = document.createElement('td');
+    rightCol1_2.innerHTML = '<i class="fas fa-khanda"></i>';
+    rightCol1.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightTrack1.appendChild(rightCol1_2);
+    rightTrack1.appendChild(rightCol1);
+    rightSiteBar.appendChild(rightTrack1);
+
+    //will show the leftover time, wins:loses, who's turn it is right now etc.
+    const rightTrack2 = document.createElement('tr');
+    rightTrack2.classList.add('StatsPanel');
+    const rightCol2 = document.createElement('td');
+    rightTrack2.appendChild(rightCol2);
+    rightSiteBar.appendChild(rightTrack2);
+
+    const rightTrack3 = document.createElement('tr');
+    rightTrack3.classList.add('deadBlackChessPieces');
+    const rightCol3 = document.createElement('td');
+    const rightCol3_2 = document.createElement('td');
+    rightCol3_2.innerHTML = '<i class="fas fa-khanda"></i>';
+    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightTrack3.appendChild(rightCol3_2);
+    rightTrack3.appendChild(rightCol3);
+    rightSiteBar.appendChild(rightTrack3);
+
+    document.getElementById('chessWrapper').appendChild(rightSiteBar);
+};

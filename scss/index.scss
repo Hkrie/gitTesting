@@ -27,7 +27,7 @@ body{
 }
 .wrapper{
 
-  width: 80%;
+  width: 90%;
   margin-top: 20px;
   margin-left: 5%;
   margin-right: 5%;
@@ -77,16 +77,61 @@ a.nav-item:visited{
 }
 
 //chess
+$chessBlack:#aaaaff;
+$chessWhite:#ededed;
+#chessWrapper{
+  display: flex;
+  flex: 6;
+  width: 100%;
+
+}
+#chessRightSiteBar{
+  width: 15rem;
+  margin-left: 1rem;
+  margin-right: auto;
+  //background-color: #0056b3;
+  color: #ffc107;
+  height: 45rem;
+  .StatsPanel{
+    height: 80%;
+    background-color: darkblue;
+  }
+  .deadWhiteChessPieces, .deadBlackChessPieces{
+    font-size: 2.5rem;
+    word-break: break-all;
+    min-height: 10%;
+  }
+  .deadWhiteChessPieces{
+    .fas{
+      transform: rotate(180deg);
+    }
+    .fa-khanda{
+      color:$chessBlack;
+      font-size: 1.5rem;
+      margin-top: auto;
+      vertical-align: middle;
+
+    }
+    color: $chessWhite;
+  }
+  .deadBlackChessPieces{
+    .fa-khanda{
+      color:$chessWhite;
+      font-size: 1.5rem;
+    }
+    color: $chessBlack;
+  }
+}
 #chess_layout{
 
   border-collapse: collapse;
   border: $border;
-  font-size: 1.35em;
-  width: 63rem;
+  font-size: 3rem;
+  width: 46.8rem;
   padding-top: 100%;
   position: relative;
   height: 45rem;
-  margin-right: auto;
+  //margin-right: auto;
   margin-left: auto;
   min-width: 310px;
   .chess_row{
@@ -97,12 +142,15 @@ a.nav-item:visited{
   .chess_col{
     border: $border;
     padding: 5px;
-    width: 7rem;
+    width: 5.2rem;
     height:5rem;
     text-align: center;
     &>.chess_black{
-      color: #aaaaff;
+      color: $chessBlack;
       transform: rotate(180deg);
+    }
+    &>.chess_white{
+      color: $chessWhite;
     }
   }
   .cords{
