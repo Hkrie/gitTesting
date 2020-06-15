@@ -77,8 +77,13 @@ a.nav-item:visited{
 }
 
 //chess
-$chessBlack:#aaaaff;
+$chessBlack:#9999ee;
 $chessWhite:#ededed;
+
+.mh-5 >i{
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
+}
 #chessWrapper{
   display: flex;
   flex: 6;
@@ -117,6 +122,8 @@ $chessWhite:#ededed;
   .deadBlackChessPieces{
     .fa-khanda{
       color:$chessWhite;
+      margin-top: auto;
+      vertical-align: middle;
       font-size: 1.5rem;
     }
     color: $chessBlack;
@@ -161,38 +168,39 @@ $chessWhite:#ededed;
     border-radius: 30%;
   }
 }
-/*
-.chessWinningNotificationPanel {
-  display: none;
+
+.lightbox {
+  /** Default lightbox to hidden */
+  //display: none;
+
+  /** Position and style */
   position: fixed;
-  z-index: 100;
-  padding-top: 100px;
-  width: 70%;
-  height: 70%;
-  overflow: auto;
+  z-index: 999;
+  color: yellow;
+  font-size: 10rem;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
   top: 0;
   left: 0;
-  background-color: rgba(170, 170, 187, 0.7);
-  color: #1b1e21;
+  background: rgba(0,0,0,0.8);
 }
 
-// Modal Content
-.chessWinningNotificationPanelContent {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  justify-content: center;
-  padding: 0;
-  width: 90%;
-  text-align: center;
-  max-width: 1200px;
-}
-@keyframes createBox {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}*/
+.lightbox div {
+  /** Pad the lightbox image */
+  max-width: 90%;
+  height: 30rem;
+  width: 40rem;
 
+  background-color: #6c757d;
+  margin: 2% auto auto;
+}
+
+.lightbox:target {
+  /** Remove default browser outline */
+  outline: none;
+
+  /** Unhide lightbox **/
+  display: block;
+}

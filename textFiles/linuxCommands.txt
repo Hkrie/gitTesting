@@ -2,6 +2,23 @@
 
 
 
+#update u.a. config files of a program - restart program
+sudo service program restart
+
+#stdin ausgabe anpassen 
+# translate delete zahlen 0-9 von ausgabe aus der datei.txt
+tr -d '0-9' < datei.txt
+#stdin
+ < output.txt
+# > === stdout-kanal (kanal 1), 2> === stderr-kanal (kanal 2) 
+#stderr in gleiche datei umleiten wie stdout
+ls >> output.txt 2>&1
+#stdout umleiten (datei ergänzen)
+ls >> output.txt
+#stdout umleiten (datei überschreiben)
+ls > output.txt
+
+
 #to kill all processess with the same name (use "top" command to see the name) 
 killall firefox
 #kill process (1234 = example pid)

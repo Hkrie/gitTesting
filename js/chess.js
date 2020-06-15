@@ -103,6 +103,11 @@ const chessGame = (event)=> {
 document.addEventListener("DOMContentLoaded", (event)=>{
     chessGame(event);
     chessSideBar();
+    const lightbox = document.createElement('div');
+        lightbox.classList.add('lightbox');
+        lightbox.id = 'chessLightbox';
+    document.getElementById('chessWrapper').appendChild(lightbox);
+    pawnSwapper();
 });
 
 function chessMovement(e){
@@ -157,21 +162,29 @@ function chessMovement2(_this){
         }
         clearNextLocations();
         //check if both selected chess pieces are of equal color
+        let movingChessPieceClassList = this2.firstChild.classList;
         if(_this.firstChild != null){
-        if((_this.firstChild.classList.contains('chess_white') && this2.firstChild.classList.contains('chess_white'))
-        || (_this.firstChild.classList.contains('chess_black') && this2.firstChild.classList.contains('chess_black'))){
+        if((_this.firstChild.classList.contains('chess_white') && movingChessPieceClassList.contains('chess_white'))
+        || (_this.firstChild.classList.contains('chess_black') && movingChessPieceClassList.contains('chess_black'))){
             console.log('equal color');
             document.getElementById(_this.id).style.backgroundColor = "initial";
             document.getElementById(this2.id).style.backgroundColor = "initial";
             return 1;
         }
         }
-        //console.log(" The first chess piece moved was: ");
-        //console.log(this2.id);
-        //console.log(" The second chess piece moved was: ");
-        //console.log(_this.id);
+
+        //check and declare winner
         if(_this.innerHTML === '<i class="fas fa-chess-king"></i>'){window.alert('Black wins the game')}
         else if(_this.innerHTML === '<i class="fas fa-chess-king chess_black"></i>'){window.alert('White wins the game')}
+        //check if pawn has reached enemy base
+        let yPos = _this.id.charAt(1);
+        if(yPos === "1" && movingChessPieceClassList.contains('chess_black')){
+            console.log('black reached enemy base');
+            //TODO notification
+        }else if(yPos === "8" && movingChessPieceClassList.contains('chess_white')){
+            console.log('white reached enemy base');
+        }
+
         if(this2.innerHTML !== ""){
             document.getElementById(_this.id).innerHTML = document.getElementById(this2.id).innerHTML;
             document.getElementById(this2.id).innerHTML = null;
@@ -537,7 +550,11 @@ const removeUselessNextLocations = (chessColor)=>{
         if(item.classList.contains('cords') || item.firstElementChild.classList.contains(chessColor)){
             a[i] = item.id;
             i++;
-            }}}
+            }
+        }else if(item.id === 'z0'){
+            a[i] = item.id;
+            i++;
+        }}
     for(let j of a){
         document.getElementById(j).classList.remove('nextLoc');
     }
@@ -564,7 +581,8 @@ const chessSideBar = () =>{
     const rightCol1 = document.createElement('td');
     const rightCol1_2 = document.createElement('td');
     rightCol1_2.innerHTML = '<i class="fas fa-khanda"></i>';
-    rightCol1.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol1.classList.add('mh-5');
+    rightCol1.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
     rightTrack1.appendChild(rightCol1_2);
     rightTrack1.appendChild(rightCol1);
     rightSiteBar.appendChild(rightTrack1);
@@ -581,10 +599,17 @@ const chessSideBar = () =>{
     const rightCol3 = document.createElement('td');
     const rightCol3_2 = document.createElement('td');
     rightCol3_2.innerHTML = '<i class="fas fa-khanda"></i>';
-    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol3.classList.add('mh-5');
+    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
     rightTrack3.appendChild(rightCol3_2);
     rightTrack3.appendChild(rightCol3);
     rightSiteBar.appendChild(rightTrack3);
 
     document.getElementById('chessWrapper').appendChild(rightSiteBar);
+};
+const pawnSwapper = ()=>{
+  const choosingPanel = document.createElement('div');
+  choosingPanel.innerHTML = "<i class='fas fa-crown'></i>";
+  document.getElementById('chessLightbox').appendChild(choosingPanel);
+  //get coordinates of row 8 -> relative position
 };
