@@ -103,11 +103,8 @@ const chessGame = (event)=> {
 document.addEventListener("DOMContentLoaded", (event)=>{
     chessGame(event);
     chessSideBar();
-    const lightbox = document.createElement('div');
-        lightbox.classList.add('lightbox');
-        lightbox.id = 'chessLightbox';
-    document.getElementById('chessWrapper').appendChild(lightbox);
-    pawnSwapper();
+    chessNotification();
+    pawnSwapNotification();
 });
 
 function chessMovement(e){
@@ -577,12 +574,12 @@ const chessSideBar = () =>{
   rightSiteBar.id = 'chessRightSiteBar';
 
     const rightTrack1 = document.createElement('tr');
-    rightTrack1.classList.add('deadWhiteChessPieces');
+    rightTrack1.id = 'deadWhiteChessPieces';
     const rightCol1 = document.createElement('td');
     const rightCol1_2 = document.createElement('td');
     rightCol1_2.innerHTML = '<i class="fas fa-khanda"></i>';
     rightCol1.classList.add('mh-5');
-    rightCol1.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol1.innerHTML = '<i class="fas fa-chess-queen"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-rook"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
     rightTrack1.appendChild(rightCol1_2);
     rightTrack1.appendChild(rightCol1);
     rightSiteBar.appendChild(rightTrack1);
@@ -595,21 +592,69 @@ const chessSideBar = () =>{
     rightSiteBar.appendChild(rightTrack2);
 
     const rightTrack3 = document.createElement('tr');
-    rightTrack3.classList.add('deadBlackChessPieces');
+    rightTrack3.id = 'deadBlackChessPieces';
     const rightCol3 = document.createElement('td');
     const rightCol3_2 = document.createElement('td');
     rightCol3_2.innerHTML = '<i class="fas fa-khanda"></i>';
     rightCol3.classList.add('mh-5');
-    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-rook"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
     rightTrack3.appendChild(rightCol3_2);
     rightTrack3.appendChild(rightCol3);
     rightSiteBar.appendChild(rightTrack3);
 
     document.getElementById('chessWrapper').appendChild(rightSiteBar);
 };
-const pawnSwapper = ()=>{
-  const choosingPanel = document.createElement('div');
-  choosingPanel.innerHTML = "<i class='fas fa-crown'></i>";
-  document.getElementById('chessLightbox').appendChild(choosingPanel);
-  //get coordinates of row 8 -> relative position
+/*
+* chessNotification() creates the notification-panel for the chess game
+* all game-intern-notifications will  be displayed as an extension of it
+* */
+const chessNotification = ()=>{
+    const lightbox = document.createElement('div');
+    lightbox.classList.add('lightbox');
+    lightbox.id = 'chessLightbox';
+    document.getElementById('chessWrapper').appendChild(lightbox);
+
+    const choosingPanel = document.createElement('div');
+    // choosingPanel.innerHTML = "<i class='fas fa-crown'></i>";
+    choosingPanel.id = 'chessNotification';
+    document.getElementById('chessLightbox').appendChild(choosingPanel);
+    const notificationStyle = document.getElementById('chessNotification').style;
+    //Position of the row id='8' === uppermost row of the board
+    const getPosition = document.getElementById('8').getBoundingClientRect();
+    notificationStyle.top = getPosition.top+4 + 'px';
+    notificationStyle.left = getPosition.left + 'px';
+    notificationStyle.width = getPosition.width+1 + 'px';
+    notificationStyle.height = document.getElementById('chess_layout').getBoundingClientRect().height + 'px'; //height of board
 };
+
+const pawnSwapNotification = () =>{
+    let color = 'deadWhiteChessPieces';
+    let choices = [];
+    const deadChessPieces = document.getElementById(color).getElementsByTagName('td')[1].children;
+    let chessPiece;
+    for(let item of deadChessPieces){
+        let itemClass = item.classList[1];
+        if(!(itemClass === "fa-chess-pawn") && !choices.includes(itemClass)){
+            choices.push(itemClass);
+        }
+        /*console.log(item);
+        if(item.classList.contains("fa-chess-queen")) {
+            chessPiece = document.createElement('i');
+            chessPiece.classList.add('fas fa-chess-queen');
+            document.getElementById('chessNotification').appendChild(chessPiece);
+        }*/
+    }
+    const output = document.getElementById('chessNotification');
+    for(let i = 0; i<=choices.length;i++){
+        let iElement = document.createElement('i');
+        iElement.classList.add('fas');
+        iElement.classList.add(choices[i]);
+        output.appendChild(iElement)
+    }
+    document.getElementById('chessLightbox').style.display = 'block';
+};
+
+const winningNotification = (color) =>{
+    //TODO add winning notification
+};
+

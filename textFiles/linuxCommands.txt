@@ -1,7 +1,8 @@
 
 
-
-
+#start/stopp service
+sudo systemctl start serviceName
+sudo systemctl stopp serviceName
 #update u.a. config files of a program - restart program
 sudo service program restart
 

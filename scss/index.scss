@@ -11,6 +11,8 @@ $border : 1px solid #ddd;
 body{
   font-size: 2em;
   line-height: 1.5em;
+  //min-width of device, layout looks shit if min-width doesn't fit
+  min-width: 930px;
   /*@media screen and (prefers-color-scheme: light) {
     color: #121212;
     background-color: #ededed;
@@ -106,7 +108,7 @@ $chessWhite:#ededed;
     word-break: break-all;
     min-height: 10%;
   }
-  .deadWhiteChessPieces{
+  #deadWhiteChessPieces{
     .fas{
       transform: rotate(180deg);
     }
@@ -119,7 +121,7 @@ $chessWhite:#ededed;
     }
     color: $chessWhite;
   }
-  .deadBlackChessPieces{
+  #deadBlackChessPieces{
     .fa-khanda{
       color:$chessWhite;
       margin-top: auto;
@@ -170,10 +172,7 @@ $chessWhite:#ededed;
 }
 
 .lightbox {
-  /** Default lightbox to hidden */
-  //display: none;
-
-  /** Position and style */
+ display: none;
   position: fixed;
   z-index: 999;
   color: yellow;
@@ -184,23 +183,18 @@ $chessWhite:#ededed;
   text-align: center;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.3);
 }
 
-.lightbox div {
-  /** Pad the lightbox image */
+.lightbox > div {
+  position: absolute;
   max-width: 90%;
-  height: 30rem;
-  width: 40rem;
-
-  background-color: #6c757d;
-  margin: 2% auto auto;
+  min-width: 620px;
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.6);
 }
 
 .lightbox:target {
-  /** Remove default browser outline */
   outline: none;
-
-  /** Unhide lightbox **/
   display: block;
 }
