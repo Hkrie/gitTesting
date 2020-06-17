@@ -1,4 +1,7 @@
-
+#set up scripts, that should run frequently at a specific time
+sudo crontab -e
+#now scroll to the button and do _ minute hour day month weekday theCommand, e.g.:
+00 5 *  * 0 ls >> ~/myLsAt5amOnSunday.txt
 
 #start/stopp service
 sudo systemctl start serviceName
@@ -48,6 +51,8 @@ grep -i -n "functions"
 #find file (in current directory)
 find . -type f -iname "*.conf"
 
+#upgrade everything and say yes to everything
+sudo apt-get upgrade -y
 #deinstall program
 sudo apt-cache remove bluefish
 #upgrade all programs

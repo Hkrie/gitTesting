@@ -103,8 +103,7 @@ const chessGame = (event)=> {
 document.addEventListener("DOMContentLoaded", (event)=>{
     chessGame(event);
     chessSideBar();
-    chessNotification();
-    pawnSwapNotification();
+    chessLightbox();
 });
 
 function chessMovement(e){
@@ -167,25 +166,33 @@ function chessMovement2(_this){
             document.getElementById(_this.id).style.backgroundColor = "initial";
             document.getElementById(this2.id).style.backgroundColor = "initial";
             return 1;
+        }else{
+            (_this.firstChild.classList.contains('chess_white'))?
+                document.getElementById('deadWhiteChessPieces').children[1].appendChild(_this.firstChild):
+                document.getElementById('deadBlackChessPieces').children[1].appendChild(_this.firstChild)
         }
         }
 
         //check and declare winner
         if(_this.innerHTML === '<i class="fas fa-chess-king"></i>'){window.alert('Black wins the game')}
         else if(_this.innerHTML === '<i class="fas fa-chess-king chess_black"></i>'){window.alert('White wins the game')}
-        //check if pawn has reached enemy base
-        let yPos = _this.id.charAt(1);
-        if(yPos === "1" && movingChessPieceClassList.contains('chess_black')){
-            console.log('black reached enemy base');
-            //TODO notification
-        }else if(yPos === "8" && movingChessPieceClassList.contains('chess_white')){
-            console.log('white reached enemy base');
-        }
-
         if(this2.innerHTML !== ""){
             document.getElementById(_this.id).innerHTML = document.getElementById(this2.id).innerHTML;
             document.getElementById(this2.id).innerHTML = null;
             //swap the next player to move a chess piece white-black
+
+            //check if pawn has reached enemy base
+            if(_this.firstChild.classList.contains('fa-chess-pawn')) {
+                let yPos = _this.id.charAt(1);
+                if (yPos === "1" && movingChessPieceClassList.contains('chess_black')) {
+                    console.log('black reached enemy base');
+                    pawnSwapNotification(_this, "deadBlackChessPieces");
+                } else if (yPos === "8" && movingChessPieceClassList.contains('chess_white')) {
+                    console.log('white reached enemy base');
+                    pawnSwapNotification(_this, "deadWhiteChessPieces");
+                }
+            }
+
             if(localStorage.getItem('player\'s turn') === 'white'){
                 localStorage.setItem('player\'s turn', 'black')
             }else{
@@ -607,13 +614,19 @@ const chessSideBar = () =>{
 /*
 * chessNotification() creates the notification-panel for the chess game
 * all game-intern-notifications will  be displayed as an extension of it
+*
+* chessNotification is recreated whenever a new notification should be shown
+* reason: window can be changed (size) in the middle of the game -> absolute position
+* i could have just updated the position, but that can be saved for the poor dude (future me) who probably refactors everything
 * */
-const chessNotification = ()=>{
+
+const chessLightbox = ()=>{
     const lightbox = document.createElement('div');
     lightbox.classList.add('lightbox');
     lightbox.id = 'chessLightbox';
     document.getElementById('chessWrapper').appendChild(lightbox);
-
+};
+const chessNotification = ()=>{
     const choosingPanel = document.createElement('div');
     // choosingPanel.innerHTML = "<i class='fas fa-crown'></i>";
     choosingPanel.id = 'chessNotification';
@@ -622,16 +635,18 @@ const chessNotification = ()=>{
     //Position of the row id='8' === uppermost row of the board
     const getPosition = document.getElementById('8').getBoundingClientRect();
     notificationStyle.top = getPosition.top+4 + 'px';
-    notificationStyle.left = getPosition.left + 'px';
+    notificationStyle.left = getPosition.left-1 + 'px';
     notificationStyle.width = getPosition.width+1 + 'px';
-    notificationStyle.height = document.getElementById('chess_layout').getBoundingClientRect().height + 'px'; //height of board
+    notificationStyle.height = document.getElementById('chess_layout').getBoundingClientRect().height+1 + 'px'; //height of board
 };
 
-const pawnSwapNotification = () =>{
-    let color = 'deadWhiteChessPieces';
+const pawnSwapNotification = (triggerElement, color) =>{
+    chessNotification();
+    // let pawn = this
+    //let color = 'deadWhiteChessPieces';
+    document.getElementById('chessLightbox').classList.add('chessShow');
     let choices = [];
     const deadChessPieces = document.getElementById(color).getElementsByTagName('td')[1].children;
-    let chessPiece;
     for(let item of deadChessPieces){
         let itemClass = item.classList[1];
         if(!(itemClass === "fa-chess-pawn") && !choices.includes(itemClass)){
@@ -645,13 +660,37 @@ const pawnSwapNotification = () =>{
         }*/
     }
     const output = document.getElementById('chessNotification');
-    for(let i = 0; i<=choices.length;i++){
+    for(let i = 0; i<choices.length;i++){
+        let iButton = document.createElement('a');
+        iButton.id = choices[i];
         let iElement = document.createElement('i');
         iElement.classList.add('fas');
         iElement.classList.add(choices[i]);
-        output.appendChild(iElement)
+        iElement.id = choices[i];
+        iButton.appendChild(iElement);
+
+        iButton.addEventListener('click', (ev)=>{
+            const eventTarget = ev.target.id;
+            //remove the selected chess piece from deadChessPieces
+            const deadRemove = document.getElementById(color).children[1];
+            for(let item of deadRemove.children){
+                if(item.classList.contains(eventTarget)){
+                    deadRemove.removeChild(item);
+                    break;
+                }
+            }
+            //remove the pawnSwapNotification
+            const toRemove = document.getElementById('chessLightbox').innerHTML = '';
+            document.getElementById('chessLightbox').classList.remove('chessShow');
+            const target = document.getElementById(triggerElement.id);
+            console.log(target);
+            target.removeChild(target.childNodes[0]);
+            target.appendChild(iElement);
+            (color === "deadWhiteChessPieces")? target.firstElementChild.classList.add('chess_white') : target.firstElementChild.classList.add('chess_black');
+        });
+        output.appendChild(iButton);
     }
-    document.getElementById('chessLightbox').style.display = 'block';
+
 };
 
 const winningNotification = (color) =>{

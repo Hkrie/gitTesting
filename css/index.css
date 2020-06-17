@@ -11843,7 +11843,7 @@ a.nav-item:visited {
   position: fixed;
   z-index: 999;
   color: yellow;
-  font-size: 10rem;
+  font-size: 8rem;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -11860,4 +11860,12 @@ a.nav-item:visited {
 
 .lightbox:target {
   outline: none;
+  display: block; }
+
+#chessLightbox a {
+  align-items: center;
+  justify-items: center;
+  padding: 1rem; }
+
+.chessShow {
   display: block; }
