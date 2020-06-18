@@ -7,12 +7,18 @@ $border : 1px solid #ddd;
 @import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
 @import "icons";
 @import "buttons";
-
+html,body{
+  height: 100%;
+}
 body{
+  display: flex;
+  flex-direction: column;
+  flex: 12;
   font-size: 2em;
   line-height: 1.5em;
   //min-width of device, layout looks shit if min-width doesn't fit
   min-width: 930px;
+  width: 100%;
   /*@media screen and (prefers-color-scheme: light) {
     color: #121212;
     background-color: #ededed;
@@ -20,25 +26,38 @@ body{
 
   &.dark{
     background-color: #121212;
-    color: #ededed;
+    color: #efefef;
+    .navbar{
+      background-color: #323232;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+    }
   }
   &.light{
-    color: #121212;
+    color: #010101;
     background-color: #ededed;
+    .navbar{
+      background-color: #cdcdcd;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    }
   }
 }
 .wrapper{
-
+  flex: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 90%;
-  margin-top: 20px;
-  margin-left: 5%;
-  margin-right: 5%;
+  height: 100%;
+  margin: 1rem 5%;
   font-size: 1em;
 }
 .row{
   display: flex;
-  flex: 12;
+  flex: 1;
   width: 100%;
+  margin-left: 0;
 }
 ul{
   list-style-type: none;
@@ -53,8 +72,8 @@ ul{
 }
 div>a.nav-item{
   text-decoration: none;
-  color: silver;
-  opacity: 0.2;
+  color: inherit;
+  opacity: 0.8;
   margin: 5px 20px;
   flex: min-content;
 }
@@ -93,15 +112,17 @@ $chessWhite:#ededed;
 
 }
 #chessRightSiteBar{
+  background-color: #121212;
   width: 15rem;
   margin-left: 1rem;
   margin-right: auto;
-  //background-color: #0056b3;
-  color: #ffc107;
   height: 45rem;
   .StatsPanel{
     height: 80%;
-    background-color: darkblue;
+    #chessInfos{
+      text-align: center;
+
+    }
   }
   .deadWhiteChessPieces, .deadBlackChessPieces{
     font-size: 2.5rem;
@@ -132,7 +153,7 @@ $chessWhite:#ededed;
   }
 }
 #chess_layout{
-
+  background-color: #121212;
   border-collapse: collapse;
   border: $border;
   font-size: 3rem;
@@ -206,3 +227,31 @@ $chessWhite:#ededed;
 .chessShow{
   display: block;
 }
+
+
+//ageCalculator
+#ageClock{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &>div{
+    font-size: 5rem;
+    margin: 1rem auto 1rem auto;
+    text-align: center;
+    padding:0.5rem;
+    line-height: 5rem;
+    //color: #aaaaff;
+    //text-shadow: 5px 5px 4px rgba(204, 0, 255, 0.6);
+    color: #a9a9ff;
+    text-shadow: 0 0 12px rgba(204, 0, 255, 1);
+  }
+}
+body.light{
+  #ageClock{
+    &>div{
+      color: #212121;
+      text-shadow: 0 0 12px rgb(0, 1, 4);
+    }
+  }
+}
+

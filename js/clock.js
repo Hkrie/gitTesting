@@ -25,3 +25,4 @@ const printClock = ()=>{
 
     setTimeout(printClock, 90);
     };
+document.addEventListener("DOMContentLoaded", printClock);

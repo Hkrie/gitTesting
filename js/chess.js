@@ -194,10 +194,12 @@ function chessMovement2(_this){
             }
 
             if(localStorage.getItem('player\'s turn') === 'white'){
-                localStorage.setItem('player\'s turn', 'black')
+                localStorage.setItem('player\'s turn', 'black');
+
             }else{
                 localStorage.setItem('player\'s turn', 'white');
             }
+            updateInfos();
         }
         document.getElementById(_this.id).style.backgroundColor = "initial";
         document.getElementById(this2.id).style.backgroundColor = "initial";
@@ -576,6 +578,16 @@ const removeUselessNextLocations = (chessColor)=>{
         }}
 };
 */
+const updateInfos = () => {
+    const target = document.getElementById('playerTurn');
+    if(localStorage.getItem('player\'s turn') === "white"){
+        target.style.color = '#ededed';
+        target.innerHTML = '<i class="fas fa-chess-king chess_white"></i><br/>white';
+    }else{
+        target.style.color = '#9999ee';
+        target.innerHTML = '<i class="fas fa-chess-king chess_black"></i><br/>black';
+    }
+};
 const chessSideBar = () =>{
   const rightSiteBar = document.createElement('table');
   rightSiteBar.id = 'chessRightSiteBar';
@@ -586,7 +598,8 @@ const chessSideBar = () =>{
     const rightCol1_2 = document.createElement('td');
     rightCol1_2.innerHTML = '<i class="fas fa-khanda"></i>';
     rightCol1.classList.add('mh-5');
-    rightCol1.innerHTML = '<i class="fas fa-chess-queen"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-rook"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol1.classList.add('w-100');
+    rightCol1.innerHTML = '';
     rightTrack1.appendChild(rightCol1_2);
     rightTrack1.appendChild(rightCol1);
     rightSiteBar.appendChild(rightTrack1);
@@ -595,6 +608,15 @@ const chessSideBar = () =>{
     const rightTrack2 = document.createElement('tr');
     rightTrack2.classList.add('StatsPanel');
     const rightCol2 = document.createElement('td');
+    rightCol2.id = 'chessInfos';
+    rightCol2.colSpan = 2;
+    const statsPanel = document.createElement('div');
+    statsPanel.id = 'statsPanel';
+    const playerTurn = document.createElement('p');
+    playerTurn.id = 'playerTurn';
+    playerTurn.innerHTML = '<i class="fas fa-chess-king chess_white"></i><br/>white';
+    statsPanel.appendChild(playerTurn);
+    rightCol2.appendChild(statsPanel);
     rightTrack2.appendChild(rightCol2);
     rightSiteBar.appendChild(rightTrack2);
 
@@ -604,7 +626,8 @@ const chessSideBar = () =>{
     const rightCol3_2 = document.createElement('td');
     rightCol3_2.innerHTML = '<i class="fas fa-khanda"></i>';
     rightCol3.classList.add('mh-5');
-    rightCol3.innerHTML = '<i class="fas fa-chess-pawn"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-rook"></i><i class="fas fa-chess-queen"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i><i class="fas fa-chess-pawn"></i>';
+    rightCol3.classList.add('w-100');
+    rightCol3.innerHTML = '';
     rightTrack3.appendChild(rightCol3_2);
     rightTrack3.appendChild(rightCol3);
     rightSiteBar.appendChild(rightTrack3);
@@ -696,4 +719,5 @@ const pawnSwapNotification = (triggerElement, color) =>{
 const winningNotification = (color) =>{
     //TODO add winning notification
 };
+
 
