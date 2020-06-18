@@ -1,5 +1,6 @@
 $border : 1px solid #ddd;
-
+$chessBackgroundColor: #121212;
+$chessColor: #efefef;
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
@@ -109,10 +110,16 @@ $chessWhite:#ededed;
   display: flex;
   flex: 6;
   width: 100%;
-
+  & .chess_white{
+    color: $chessWhite;
+  }
+  & .chess_black{
+    color: $chessBlack;
+    transform: rotate(180deg);
+  }
 }
 #chessRightSiteBar{
-  background-color: #121212;
+  background-color: $chessBackgroundColor;
   width: 15rem;
   margin-left: 1rem;
   margin-right: auto;
@@ -175,13 +182,6 @@ $chessWhite:#ededed;
     width: 5.2rem;
     height:5rem;
     text-align: center;
-    &>.chess_black{
-      color: $chessBlack;
-      transform: rotate(180deg);
-    }
-    &>.chess_white{
-      color: $chessWhite;
-    }
   }
   .cords{
     color: #aab;
@@ -190,6 +190,9 @@ $chessWhite:#ededed;
     background-color: rgba(144,238,144, 0.7);
     border-radius: 30%;
   }
+}
+.chess_black_Color{
+  color: $chessBlack;
 }
 
 .lightbox {
@@ -226,6 +229,11 @@ $chessWhite:#ededed;
 }
 .chessShow{
   display: block;
+}
+#chessWinningPanel{
+  background-color: $chessBackgroundColor;
+  z-index: 3;
+
 }
 
 

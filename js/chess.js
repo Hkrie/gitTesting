@@ -4,7 +4,7 @@ const items = [
 
 ];
 let firstTarget = null;
-const chessGame = (event)=> {
+const chessGame = ()=> {
 
     //ll.4 - 87 create chess board with all chess pieces
     const table = document.createElement('table');
@@ -100,10 +100,11 @@ const chessGame = (event)=> {
 
 
 };
-document.addEventListener("DOMContentLoaded", (event)=>{
-    chessGame(event);
+document.addEventListener("DOMContentLoaded", ()=>{
+    chessGame();
     chessSideBar();
     chessLightbox();
+    winningNotification('chess_black')
 });
 
 function chessMovement(e){
@@ -122,7 +123,6 @@ function chessMovement(e){
 }
 function chessMovement2(_this){
     let this2 = firstTarget;
-
     if(_this === this2 || this2==null){
         if(this2 == null && _this.firstChild != null){
             //show the next possible Movements of the selected chess piece
@@ -136,7 +136,7 @@ function chessMovement2(_this){
             return 2;}
         return -1
     }else if(_this && this2){
-        console.log(_this);
+       if(_this.innerHTML === ''){ console.log(_this);}
         console.log(this2);
 
         //check if the correct player is moving
@@ -166,17 +166,24 @@ function chessMovement2(_this){
             document.getElementById(_this.id).style.backgroundColor = "initial";
             document.getElementById(this2.id).style.backgroundColor = "initial";
             return 1;
-        }else{
-            (_this.firstChild.classList.contains('chess_white'))?
-                document.getElementById('deadWhiteChessPieces').children[1].appendChild(_this.firstChild):
-                document.getElementById('deadBlackChessPieces').children[1].appendChild(_this.firstChild)
-        }
+            }
         }
 
         //check and declare winner
-        if(_this.innerHTML === '<i class="fas fa-chess-king"></i>'){window.alert('Black wins the game')}
-        else if(_this.innerHTML === '<i class="fas fa-chess-king chess_black"></i>'){window.alert('White wins the game')}
+        if(_this.innerHTML === '<i class="fas fa-chess-king chess_white"></i>'){
+            winningNotification('black');
+            return 0;
+        }
+        else if(_this.innerHTML === '<i class="fas fa-chess-king chess_black"></i>'){
+            winningNotification('white');
+            return 0;
+        }
         if(this2.innerHTML !== ""){
+            if(_this.innerHTML !== ''){
+                (_this.firstChild.classList.contains('chess_white'))?
+                document.getElementById('deadWhiteChessPieces').children[1].appendChild(_this.firstChild):
+                document.getElementById('deadBlackChessPieces').children[1].appendChild(_this.firstChild);
+            }
             document.getElementById(_this.id).innerHTML = document.getElementById(this2.id).innerHTML;
             document.getElementById(this2.id).innerHTML = null;
             //swap the next player to move a chess piece white-black
@@ -446,8 +453,7 @@ const showPossibleMovements = (myTarget)=>{
               }
           }
 
-          for (let y = parseInt(yPos)+1; y<=8;y++){
-              console.log(document.getElementById(xPos + y));
+          for (let y = (yPos+1); y<=8;y++){
               document.getElementById(xPos + y).classList.add('nextLoc');
               document.getElementById(xPos + y).style.backgroundColor = null;
               if(document.getElementById(xPos + y).innerHTML !== ''){
@@ -657,7 +663,7 @@ const chessNotification = ()=>{
     const notificationStyle = document.getElementById('chessNotification').style;
     //Position of the row id='8' === uppermost row of the board
     const getPosition = document.getElementById('8').getBoundingClientRect();
-    notificationStyle.top = getPosition.top+4 + 'px';
+    notificationStyle.top = getPosition.top-1 + 'px';
     notificationStyle.left = getPosition.left-1 + 'px';
     notificationStyle.width = getPosition.width+1 + 'px';
     notificationStyle.height = document.getElementById('chess_layout').getBoundingClientRect().height+1 + 'px'; //height of board
@@ -717,7 +723,58 @@ const pawnSwapNotification = (triggerElement, color) =>{
 };
 
 const winningNotification = (color) =>{
+    color = 'white';
+    document.getElementById('chessLightbox').classList.add('chessShow');
+    chessNotification();
+    const notification = document.getElementById('chessNotification');
+    const crownIcon = document.createElement('p');
+    crownIcon.innerHTML = '<i class="fas fa-crown"></i>';
+    crownIcon.style.color = '#ffff00';
+    notification.appendChild(crownIcon);
+    notification.appendChild(crownIcon);
+
+    const winningPanel = document.createElement('div');
+    winningPanel.id = 'chessWinningPanel';
+
+    const dots = document.createElement('div');//bg=transparent
+    const winnerKing = document.createElement('div');
+    if(color === 'white'){
+        dots.innerHTML =
+            '<i class="fas fa-circle chess_white top-left"></i>' +
+            '<i class="fas fa-circle chess_white top-right"></i>' +
+            '<i class="fas fa-circle chess_white bottom-right"></i>' +
+            '<i class="fas fa-circle chess_white bottom-left"></i>';
+        winnerKing.innerHTML =
+            '<i class="fas fa-chess-king chess_white"></i>' +
+            '<p class="chess_white">White wins the game</p>';
+    }else{
+        dots.innerHTML =
+            '<i class="fas fa-circle chess_black_Color top-left"></i>' +
+            '<i class="fas fa-circle chess_black_Color top-right"></i>' +
+            '<i class="fas fa-circle chess_black_Color bottom-right"></i>' +
+            '<i class="fas fa-circle chess_black_Color bottom-left"></i>';
+        winnerKing.innerHTML =
+            '<i class="fas fa-chess-king chess_black_Color"></i>' +
+            '<p class="chess_black_Color">White wins the game</p>';
+    }
+    const playAgain = document.createElement('button');
+    playAgain.innerHTML = 'Play again';
+    playAgain.id = 'chessPlayAgain';
+    playAgain.addEventListener('click', resetGame);
+
+    winningPanel.appendChild(dots);
+    winningPanel.appendChild(winnerKing);
+    winningPanel.appendChild(playAgain);
+
+    notification.appendChild(winningPanel);
     //TODO add winning notification
 };
 
+const resetGame = ()=>{
+   // location.reload();
 
+    document.getElementById('chessWrapper').innerHTML = '';
+    chessGame();
+    chessSideBar();
+    chessLightbox();
+};
