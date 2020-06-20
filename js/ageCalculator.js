@@ -1,16 +1,16 @@
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
     const BodyClockDec = document.createElement("div");
-    BodyClockDec.id ='bodyClockDec';
+    BodyClockDec.id = 'bodyClockDec';
     document.getElementById('ageClock').appendChild(BodyClockDec);
 
     const BodyClock = document.createElement("div");
-    BodyClock.id ='bodyClock';
+    BodyClock.id = 'bodyClock';
     document.getElementById('ageClock').appendChild(BodyClock);
-    printAgeDecimal();
+    //printAgeDecimal();
     printAgeFull();
 });
 
-const printAgeDecimal = ()=>{
+/*const printAgeDecimal = () => {
     const person = {
         'year': 2000,
         'month': '9',
@@ -26,18 +26,18 @@ const printAgeDecimal = ()=>{
         'minute': 51,
     };
     const myBirthday = person;
-    myBirthday.month = myBirthday.month-1;
+    myBirthday.month = myBirthday.month - 1;
     //change let to const where possible
     const day = new Date();
     const birthdayDate = new Date(myBirthday.year, myBirthday.month, myBirthday.day, myBirthday.hour, myBirthday.minute, 0);
-    const difference = day.getTime()-birthdayDate.getTime();
-    const differenceInSeconds = difference/1000;
-    let myYears = differenceInSeconds/31556952;
+    const difference = day.getTime() - birthdayDate.getTime();
+    const differenceInSeconds = difference / 1000;
+    let myYears = differenceInSeconds / 31556952;
     const bodyClock = document.getElementById('bodyClockDec');
-    bodyClock.innerHTML= myYears.toFixed(9).toString();
+    bodyClock.innerHTML = myYears.toFixed(9).toString();
     setTimeout(printAgeDecimal, 100);
-};
-const printAgeFull = ()=>{
+};*/
+const printAgeFull = () => {
     const person = {
         'foreverYoung': 'false',
         'year': 2000,
@@ -55,7 +55,7 @@ const printAgeFull = ()=>{
         'minute': 51,
     };
     const myBirthday = person;
-    myBirthday.month = myBirthday.month-1;
+    myBirthday.month = myBirthday.month - 1;
     const day = new Date();
     const birthdayDate = new Date(myBirthday.year, myBirthday.month, myBirthday.day, myBirthday.hour, myBirthday.minute, 0);
     const difference = day.getTime() - birthdayDate.getTime();
@@ -64,10 +64,10 @@ const printAgeFull = ()=>{
     let myYears = Math.floor(differenceInSeconds / 31556952);
     let dif;
 
-    if(myBirthday.foreverYoung !== "true") {
+    if (myBirthday.foreverYoung !== "true") {
         dif = differenceInSeconds - myYears * 31556952;
-    }else{    //read about it, found it hilarious, had to code it
-        if(myYears>18) {
+    } else {    //read about it, found it hilarious, had to code it
+        if (myYears > 18) {
             myYears = 18;
         }
         dif = differenceInSeconds - myYears * 31556952;
@@ -88,13 +88,21 @@ const printAgeFull = ()=>{
     let myMilliSeconds = Math.floor((dif - mySeconds) * 100);
     //(myMonth<10)? myMonth = '0' + myMonth : myMonth;
     //(myDays<10)? myDays = '0' + myDays : myDays;
-    (mySeconds<10)? mySeconds = '0' + mySeconds : mySeconds;
+    (mySeconds < 10) ? mySeconds = '0' + mySeconds : mySeconds;
     //(myMinutes<10)? myMinutes = '0' + myMinutes : myMinutes;
-    (myMilliSeconds<10)? myMilliSeconds = '0' + myMilliSeconds : myMilliSeconds;
+    (myMilliSeconds < 10) ? myMilliSeconds = '0' + myMilliSeconds : myMilliSeconds;
 
     const bodyClock = document.getElementById('bodyClock');
-    bodyClock.innerHTML= myHours + ':' + myMinutes + ':' + mySeconds + ':' + myMilliSeconds + '\xa0\xa0\xa0' + myDays + '.' + myMonth + '.' + myYears;
-    bodyClock.innerHTML= myYears + 'y ' + myMonth + 'mo ' + myDays + 'd ' + '<br>' + myHours + 'h ' + myMinutes + 'm ' + mySeconds + 's ' + myMilliSeconds + 'ms';
+    bodyClock.innerHTML = myHours + ':' + myMinutes + ':' + mySeconds + ':' + myMilliSeconds + '\xa0\xa0\xa0' + myDays + '.' + myMonth + '.' + myYears;
+    bodyClock.innerHTML = myYears + 'y ' + myMonth + 'mo ' + myDays + 'd ' + '<br>' + myHours + 'h ' + myMinutes + 'm ' + mySeconds + 's ' + myMilliSeconds + 'ms';
+
+
+    //bodyClock age in decimal number
+    let myYearsDec = differenceInSeconds / 31556952;
+    const bodyClockDec = document.getElementById('bodyClockDec');
+    bodyClockDec.innerHTML = myYearsDec.toFixed(9).toString();
+
+
     setTimeout(printAgeFull, 100);
 };
 
