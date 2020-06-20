@@ -11811,6 +11811,8 @@ a.nav-item:visited {
     height: 80%; }
     #chessRightSiteBar .StatsPanel #chessInfos {
       text-align: center; }
+  #chessRightSiteBar .rotate-90 {
+    transform: rotate(270deg); }
   #chessRightSiteBar .deadWhiteChessPieces, #chessRightSiteBar .deadBlackChessPieces {
     font-size: 2.5rem;
     word-break: break-all;
@@ -11895,8 +11897,28 @@ a.nav-item:visited {
   display: block; }
 
 #chessWinningPanel {
+  padding: 0.5rem;
+  height: 23rem;
+  font-size: 3rem;
   background-color: #121212;
   z-index: 3; }
+  #chessWinningPanel .fa-chess-king {
+    font-size: 5rem; }
+  #chessWinningPanel #chessPlayAgain {
+    /* display: table-cell;
+    vertical-align: bottom;*/
+    margin-top: 1rem;
+    width: 90%;
+    background-color: transparent;
+    font-size: 2.5rem;
+    outline: #0066ff;
+    border-color: #0066ff;
+    color: #0038FA;
+    text-shadow: 0 0 1px #fff; }
+    #chessWinningPanel #chessPlayAgain:focus {
+      outline: initial; }
+    #chessWinningPanel #chessPlayAgain > p {
+      margin-bottom: 0.5rem; }
 
 #ageClock {
   display: flex;

@@ -4,6 +4,7 @@
     <list default="true" id="83a5f941-ed0a-4e12-b50b-882a9f5edd6f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/ageCalculator.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/ageCalculator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/chess.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/chess.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
     </list>
@@ -40,13 +41,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Haral\OneDrive\Desktop\Tests\css" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Haral\OneDrive\Desktop\Tests\js" />
       <recent name="C:\Users\Haral\OneDrive\Desktop\Tests\scss" />
       <recent name="C:\Users\Haral\OneDrive\Desktop\Tests\content" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Haral\OneDrive\Desktop\Tests\css" />
     </key>
   </component>
   <component name="RunManager">
@@ -107,7 +108,8 @@
       <workItem from="1592256319144" duration="1701000" />
       <workItem from="1592258427293" duration="1044000" />
       <workItem from="1592312431274" duration="6496000" />
-      <workItem from="1592380518637" duration="33643000" />
+      <workItem from="1592380518637" duration="42659000" />
+      <workItem from="1592688470422" duration="534000" />
     </task>
     <servers />
   </component>
@@ -138,26 +140,26 @@
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state x="465" y="211" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1587820448554" />
-    <state width="1347" height="199" key="GridCell.Tab.0.bottom" timestamp="1592460513949">
+    <state width="1347" height="199" key="GridCell.Tab.0.bottom" timestamp="1592589884004">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state width="1346" height="199" key="GridCell.Tab.0.bottom/0.0.1368.912/2736.0.1920.1080@0.0.1368.912" timestamp="1592208534061" />
-    <state width="1347" height="199" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1592460513949" />
-    <state width="1347" height="199" key="GridCell.Tab.0.center" timestamp="1592460513948">
+    <state width="1347" height="199" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1592589884004" />
+    <state width="1347" height="199" key="GridCell.Tab.0.center" timestamp="1592589884002">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state width="1346" height="199" key="GridCell.Tab.0.center/0.0.1368.912/2736.0.1920.1080@0.0.1368.912" timestamp="1592208534061" />
-    <state width="1347" height="199" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1592460513948" />
-    <state width="1347" height="199" key="GridCell.Tab.0.left" timestamp="1592460513947">
+    <state width="1347" height="199" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1592589884002" />
+    <state width="1347" height="199" key="GridCell.Tab.0.left" timestamp="1592589884000">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state width="1346" height="199" key="GridCell.Tab.0.left/0.0.1368.912/2736.0.1920.1080@0.0.1368.912" timestamp="1592208534060" />
-    <state width="1347" height="199" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1592460513947" />
-    <state width="1347" height="199" key="GridCell.Tab.0.right" timestamp="1592460513949">
+    <state width="1347" height="199" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1592589884000" />
+    <state width="1347" height="199" key="GridCell.Tab.0.right" timestamp="1592589884002">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state width="1346" height="199" key="GridCell.Tab.0.right/0.0.1368.912/2736.0.1920.1080@0.0.1368.912" timestamp="1592208534061" />
-    <state width="1347" height="199" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1592460513949" />
+    <state width="1347" height="199" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1592589884002" />
     <state width="1346" height="275" key="GridCell.Tab.1.bottom" timestamp="1591036983348">
       <screen x="0" y="0" width="1368" height="912" />
     </state>

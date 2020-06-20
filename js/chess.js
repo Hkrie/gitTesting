@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     chessGame();
     chessSideBar();
     chessLightbox();
-    winningNotification('chess_black')
 });
 
 function chessMovement(e){
@@ -180,9 +179,13 @@ function chessMovement2(_this){
         }
         if(this2.innerHTML !== ""){
             if(_this.innerHTML !== ''){
-                (_this.firstChild.classList.contains('chess_white'))?
-                document.getElementById('deadWhiteChessPieces').children[1].appendChild(_this.firstChild):
+                if(_this.firstChild.classList.contains('chess_white')){
+                document.getElementById('deadWhiteChessPieces').children[1].appendChild(_this.firstChild)
+                }else{
+                _this.firstChild.classList.remove('chess_black');
+                _this.firstChild.classList.add('chess_black_Color');
                 document.getElementById('deadBlackChessPieces').children[1].appendChild(_this.firstChild);
+                }
             }
             document.getElementById(_this.id).innerHTML = document.getElementById(this2.id).innerHTML;
             document.getElementById(this2.id).innerHTML = null;
@@ -591,7 +594,7 @@ const updateInfos = () => {
         target.innerHTML = '<i class="fas fa-chess-king chess_white"></i><br/>white';
     }else{
         target.style.color = '#9999ee';
-        target.innerHTML = '<i class="fas fa-chess-king chess_black"></i><br/>black';
+        target.innerHTML = '<i class="fas fa-chess-king chess_black_Color"></i><br/>black';
     }
 };
 const chessSideBar = () =>{
@@ -620,6 +623,7 @@ const chessSideBar = () =>{
     statsPanel.id = 'statsPanel';
     const playerTurn = document.createElement('p');
     playerTurn.id = 'playerTurn';
+    playerTurn.classList.add('rotate-90');
     playerTurn.innerHTML = '<i class="fas fa-chess-king chess_white"></i><br/>white';
     statsPanel.appendChild(playerTurn);
     rightCol2.appendChild(statsPanel);
@@ -736,33 +740,22 @@ const winningNotification = (color) =>{
     const winningPanel = document.createElement('div');
     winningPanel.id = 'chessWinningPanel';
 
-    const dots = document.createElement('div');//bg=transparent
     const winnerKing = document.createElement('div');
     if(color === 'white'){
-        dots.innerHTML =
-            '<i class="fas fa-circle chess_white top-left"></i>' +
-            '<i class="fas fa-circle chess_white top-right"></i>' +
-            '<i class="fas fa-circle chess_white bottom-right"></i>' +
-            '<i class="fas fa-circle chess_white bottom-left"></i>';
         winnerKing.innerHTML =
             '<i class="fas fa-chess-king chess_white"></i>' +
-            '<p class="chess_white">White wins the game</p>';
+            '<p class="chess_white">White<br/><small>wins the game</small></p>';
     }else{
-        dots.innerHTML =
-            '<i class="fas fa-circle chess_black_Color top-left"></i>' +
-            '<i class="fas fa-circle chess_black_Color top-right"></i>' +
-            '<i class="fas fa-circle chess_black_Color bottom-right"></i>' +
-            '<i class="fas fa-circle chess_black_Color bottom-left"></i>';
         winnerKing.innerHTML =
             '<i class="fas fa-chess-king chess_black_Color"></i>' +
-            '<p class="chess_black_Color">White wins the game</p>';
+            '<p class="chess_black_Color">Black<br/>wins the game</p>';
     }
     const playAgain = document.createElement('button');
-    playAgain.innerHTML = 'Play again';
+    playAgain.innerHTML = '<p>Play again</p>';
     playAgain.id = 'chessPlayAgain';
     playAgain.addEventListener('click', resetGame);
 
-    winningPanel.appendChild(dots);
+    //winningPanel.appendChild(dots);
     winningPanel.appendChild(winnerKing);
     winningPanel.appendChild(playAgain);
 

@@ -11,14 +11,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 const printAgeDecimal = ()=>{
-    const myBirthday = {
-        'gender': 'male',
+    const person = {
         'year': 2000,
         'month': '9',
         'day': 12,
         'hour': 12,
         'minute': 18,
     };
+    const martinKotschmar = {
+        'year': 1999,
+        'month': '8',
+        'day': 4,
+        'hour': 9,
+        'minute': 51,
+    };
+    const myBirthday = person;
+    myBirthday.month = myBirthday.month-1;
     //change let to const where possible
     const day = new Date();
     const birthdayDate = new Date(myBirthday.year, myBirthday.month, myBirthday.day, myBirthday.hour, myBirthday.minute, 0);
@@ -30,14 +38,24 @@ const printAgeDecimal = ()=>{
     setTimeout(printAgeDecimal, 100);
 };
 const printAgeFull = ()=>{
-    const myBirthday = {
-        'gender': 'male',
+    const person = {
+        'foreverYoung': 'false',
         'year': 2000,
         'month': '9',
         'day': 12,
         'hour': 12,
         'minute': 18,
     };
+    const martinKotschmar = {
+        'foreverYoung': 'false',
+        'year': 1999,
+        'month': '8',
+        'day': 4,
+        'hour': 9,
+        'minute': 51,
+    };
+    const myBirthday = person;
+    myBirthday.month = myBirthday.month-1;
     const day = new Date();
     const birthdayDate = new Date(myBirthday.year, myBirthday.month, myBirthday.day, myBirthday.hour, myBirthday.minute, 0);
     const difference = day.getTime() - birthdayDate.getTime();
@@ -46,7 +64,7 @@ const printAgeFull = ()=>{
     let myYears = Math.floor(differenceInSeconds / 31556952);
     let dif;
 
-    if(myBirthday.gender !== "female") {
+    if(myBirthday.foreverYoung !== "true") {
         dif = differenceInSeconds - myYears * 31556952;
     }else{    //read about it, found it hilarious, had to code it
         if(myYears>18) {
