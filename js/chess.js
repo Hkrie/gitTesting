@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chessGame();
     chessSideBar();
     chessLightbox();
+
 });
 
 function chessMovement(e) {
@@ -681,14 +682,15 @@ const chessSideBar = () => {
 
     const rightTrack1 = document.createElement('tr');
     rightTrack1.id = 'deadWhiteChessPieces';
-    const rightCol1 = document.createElement('td');
+    //row 1 col 1 -> rightCol1_1, etc.
     const rightCol1_2 = document.createElement('td');
-    rightCol1_2.innerHTML = '<i class="fas fa-khanda"></i>';
-    rightCol1.classList.add('mh-5');
-    rightCol1.classList.add('w-100');
-    rightCol1.innerHTML = '';
+    const rightCol1_1 = document.createElement('td');
+    rightCol1_1.innerHTML = '<i class="fas fa-khanda"></i>';
+    rightCol1_2.classList.add('mh-5');
+    rightCol1_2.classList.add('w-100');
+    rightCol1_2.innerHTML = '';
+    rightTrack1.appendChild(rightCol1_1);
     rightTrack1.appendChild(rightCol1_2);
-    rightTrack1.appendChild(rightCol1);
     rightSiteBar.appendChild(rightTrack1);
 
     //will show the leftover time, wins:loses, who's turn it is right now etc.
@@ -701,7 +703,7 @@ const chessSideBar = () => {
     statsPanel.id = 'statsPanel';
     const playerTurn = document.createElement('p');
     playerTurn.id = 'playerTurn';
-    playerTurn.classList.add('rotate-90');
+    playerTurn.classList.add('rotate-270');
     playerTurn.innerHTML = '<i class="fas fa-chess-king chess_white"></i><br/>white';
     statsPanel.appendChild(playerTurn);
     rightCol2.appendChild(statsPanel);
@@ -710,14 +712,14 @@ const chessSideBar = () => {
 
     const rightTrack3 = document.createElement('tr');
     rightTrack3.id = 'deadBlackChessPieces';
-    const rightCol3 = document.createElement('td');
     const rightCol3_2 = document.createElement('td');
-    rightCol3_2.innerHTML = '<i class="fas fa-khanda"></i>';
-    rightCol3.classList.add('mh-5');
-    rightCol3.classList.add('w-100');
-    rightCol3.innerHTML = '';
+    const rightCol3_1 = document.createElement('td');
+    rightCol3_1.innerHTML = '<i class="fas fa-khanda"></i>';
+    rightCol3_2.classList.add('mh-5');
+    rightCol3_2.classList.add('w-100');
+    rightCol3_2.innerHTML = '';
+    rightTrack3.appendChild(rightCol3_1);
     rightTrack3.appendChild(rightCol3_2);
-    rightTrack3.appendChild(rightCol3);
     rightSiteBar.appendChild(rightTrack3);
 
     document.getElementById('chessWrapper').appendChild(rightSiteBar);
@@ -753,6 +755,9 @@ const chessNotification = () => {
 
 const pawnSwapNotification = (triggerElement, color) => {
     chessNotification();
+    if (color !== 'deadWhiteChessPieces') {
+        document.getElementById('chessNotification').classList.add('rotate-180');
+    }
     // let pawn = this
     //let color = 'deadWhiteChessPieces';
     document.getElementById('chessLightbox').classList.add('chessShow');
@@ -763,12 +768,6 @@ const pawnSwapNotification = (triggerElement, color) => {
         if (!(itemClass === "fa-chess-pawn") && !choices.includes(itemClass)) {
             choices.push(itemClass);
         }
-        /*console.log(item);
-        if(item.classList.contains("fa-chess-queen")) {
-            chessPiece = document.createElement('i');
-            chessPiece.classList.add('fas fa-chess-queen');
-            document.getElementById('chessNotification').appendChild(chessPiece);
-        }*/
     }
     const output = document.getElementById('chessNotification');
     for (let i = 0; i < choices.length; i++) {
@@ -776,6 +775,7 @@ const pawnSwapNotification = (triggerElement, color) => {
         iButton.id = choices[i];
         let iElement = document.createElement('i');
         iElement.classList.add('fas');
+        (color === 'deadWhiteChessPieces') ? iElement.classList.add('chess_white') : iElement.classList.add('chess_black_Color');
         iElement.classList.add(choices[i]);
         iElement.id = choices[i];
         iButton.appendChild(iElement);
@@ -791,8 +791,9 @@ const pawnSwapNotification = (triggerElement, color) => {
                 }
             }
             //remove the pawnSwapNotification
-            const toRemove = document.getElementById('chessLightbox').innerHTML = '';
-            document.getElementById('chessLightbox').classList.remove('chessShow');
+            const toRemove = document.getElementById('chessLightbox');
+            toRemove.innerHTML = '';
+            toRemove.classList.remove('chessShow');
             const target = document.getElementById(triggerElement.id);
             console.log(target);
             target.removeChild(target.childNodes[0]);

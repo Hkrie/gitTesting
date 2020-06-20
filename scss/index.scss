@@ -131,7 +131,7 @@ $chessWhite:#ededed;
 
     }
   }
-  .rotate-90{
+  .rotate-270{
     transform: rotate(270deg);
 
   }
@@ -226,10 +226,15 @@ $chessWhite:#ededed;
   outline: none;
   display: block;
 }
-#chessLightbox a{
-  align-items: center;
-  justify-items: center;
-  padding: 1rem;
+#chessLightbox {
+  .rotate-180{
+    transform: rotate(180deg);
+  }
+  & a{
+    align-items: center;
+    justify-items: center;
+    padding: 1rem;
+  }
 }
 .chessShow{
   display: block;

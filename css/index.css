@@ -11811,7 +11811,7 @@ a.nav-item:visited {
     height: 80%; }
     #chessRightSiteBar .StatsPanel #chessInfos {
       text-align: center; }
-  #chessRightSiteBar .rotate-90 {
+  #chessRightSiteBar .rotate-270 {
     transform: rotate(270deg); }
   #chessRightSiteBar .deadWhiteChessPieces, #chessRightSiteBar .deadBlackChessPieces {
     font-size: 2.5rem;
@@ -11887,6 +11887,9 @@ a.nav-item:visited {
 .lightbox:target {
   outline: none;
   display: block; }
+
+#chessLightbox .rotate-180 {
+  transform: rotate(180deg); }
 
 #chessLightbox a {
   align-items: center;
