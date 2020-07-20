@@ -1,0 +1,114 @@
+beleuchtungsstärke
+abmusterung nach ISO 12647 => leuchtstärke 2000lx
+
+wo 	temperatur	normlicht	uv	geräte
+druck => 5000 K 	D50		mit	alter Mac Monitor	Sonnenlicht		abmusterung von drucken
+	6000 K		D65		mit	pc monitor neuer mac	bewölkter himmel	abmusterung von bildschirmen
+
+
+
+Farbabstandsberechnung
+ΔE = √ [ (Δa)² + (Δb)² + (ΔL)² ]
+E-> abstand zwischen den punkten
+a,b,L -> licht -und farbwerte (des ersten minus die des anderen)
+
+
+
+Ziel von Colormanagement: Farbrichtige Reproduktion
+
+
+Proof:
+ relativ farbmetrisch
+Der Weißpunkt wird nicht verschoben.
+Proof ohne Simulation der Papierfarbe, also auf Auflagenpapier (Diese Proof-Logik ist heutzutage in der Praxis selten bis nie anzutreffen, da als Proofdrucker Tintenstrahler verwendet werden und diese nur auf speziellem Papier ein optimales Ergebnis erzielen.)
+
+absolut farbmetrisch
+Der Weißpunkt wird verschoben.
+Proof mit Simulation der Papierfarbe (gegenwärtig die übliche Art, einen Proof zu erstellen, siehe oben)
+Kein Proof, Mediale Aufbereitung
+
+ Sättigung
+lineare Komprimierung
+Sättigung wird auf Kosten des Farbtones genauer wiedergegeben
+gut für die Konvertierung von  Grafiken
+
+ perzeptiv („fotografisch“)
+logarithmische Komprimierung
+der menschlichen Wahrnehmung entsprechend
+gut für die Konvertierung von Fotos, besonders, wenn wichtige Farben bzw. Strukturen außerhalb des Zielfarbraumes liegen
+
+
+
+arbeitsfarbraum
+->in internet: srgb
+
+-> in offset: adobe rgb 98, ECI-rgb  (srgb eher nicht)
+cmyk-> coated (auf papier) z.B. iso coated-v2
+
+
+
+farbproof-> contract proof
+farbverbindlich, keine rasterung, hochwertige tintenstrahler, mit farbmanagement,...
+standardisierte Druckbedingungen
+
+
+
+messgeräte
+grafik->farbe->Messgeräte
+
+standard pdf/x-1a und pdf/x-4 sind prüfungsrelevant
+siehe binding->workflowkonzepte unten - ab standard definitiv relevant!!
+
+
+
+
+
+druckverfahren in grundzügen verstehen, grafik zum druck interpretieren können (was beim druck passiert)
+
+
+offset - produktionsbedingt wasserfest
+
+auflagenhöhe	druckverfahren
+flachdruck	mittel
+hochdruck	mehr
+tiefdruck	open end  -  auch der schnellste von allen  
+siebdruck	wenig 
+
+druckverfahren an bildern zuordnen
+
+
+digitaldruck (unterscheiden von klassischen druckverfahren
+tintenstrahl oder laserdruck
+ohne feste druckform -> auch einzelstücke
+personalisierung, print on demand, imprint
+sehr langsam-> kleinste auflagenhöhe
+
+
+papierherstellung reihenfolge (insgesamt 7 verschiedene punkte)
+
+
+
+Berechnungen: 
+bildschirm 720x1600, 1,4 qualitätsfaktor, 60er raster
+Auflösung = Rasterweite * Qualitätsfaktor * Skalierungsfaktor
+A = R*Q*s
+= 60 1/cm * 1,4 * 1
+A = 84 1/cm	//in ppcm
+720 / 84 1/cm = 8,6cm		1600/84 = 19,0cm
+
+
+600dpi und 100lpi wie viele graustufen sind druckbar?
+d = (d/l)^2 + 1
+= 37
+=> 37 graustufen druckbar
+
+80gramm papier 500stk
+80gr papier = 80 g/m^2
+A4: 21cm*29,7cm =x 
+m = 80 * x * 500 = y
+y = 2494,8gr
+
+
+
+rechnungen machen 40-50% aus
+

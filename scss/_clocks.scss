@@ -1,0 +1,23 @@
+#clock{
+  color: #aaaaff;
+  text-shadow: 0 0 4px #cc00ff;
+  right: 0;
+  padding: 5px;
+  margin: 2px 2px 2px auto;
+}
+
+//ageCalculator
+#ageClock{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &>div{
+    font-size: 5rem;
+    margin: 1rem auto 1rem auto;
+    text-align: center;
+    padding:0.5rem;
+    line-height: 5rem;
+    color: #a9a9ff;
+    text-shadow: 0 0 12px rgba(204, 0, 255, 1);
+  }
+}

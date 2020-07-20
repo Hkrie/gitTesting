@@ -1,0 +1,98 @@
+//https://www.w3schools.com/css/css3_animations.asp
+#loadAnimation1{
+  margin: 3rem;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  background-color: purple;
+  //animation: simpleRotation 2s infinite linear;
+}
+@keyframes simpleRotation {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+
+#loadAnimation2{
+  margin: 3rem;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  //animation: fadingAnimation 2s infinite linear;
+}
+@keyframes fadingAnimation {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: blue;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+#loadAnimation3{
+  margin: 3rem;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  //animation: fadingRotatingAnimation 2s infinite linear;
+}
+@keyframes fadingRotatingAnimation {
+  0% {
+    transform: rotate(0deg);
+    background-color: transparent;
+  }
+  50% {
+    transform: rotate(360deg);
+    background-color: blue;
+  }
+  100% {
+    transform: rotate(0deg);
+    background-color: transparent;
+  }
+}
+
+
+#loadAnimation4{
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  width: fit-content;
+  margin: 3rem;
+  position: relative;
+
+  & div{
+    margin: 1.5rem;
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    background-color: transparent;
+    animation: colorWave 3s infinite ease-in-out;
+  }
+}
+#loadAnimation4 div:nth-child(1){
+  animation-delay: 0s;
+}
+#loadAnimation4 div:nth-child(2){
+  animation-delay: .4s;
+}
+#loadAnimation4 div:nth-child(3){
+  animation-delay: .8s;
+}
+
+@keyframes colorWave {
+  0%{
+    background-color: transparent;
+  }
+  35%{
+    background-color: blue;
+  }
+  100%{
+    background-color: transparent;
+  }
+}
+
+
